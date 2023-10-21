@@ -30,11 +30,12 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-app.get("/api/jobs/getAllJobs",(req, res) => {
-  res.send(getAllJobs)
-})
+app.get("/api/jobs/getAllJobs", (req, res) => {
+  res.send(getAllJobs);
+});
+const port = 8800;
 
-app.listen(8800, () => {
+app.listen(port, "0.0.0.0", () => {
   connect();
   console.log(`http://localhost:8800`);
 });
