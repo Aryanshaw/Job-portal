@@ -56,21 +56,23 @@ export const updateJob = async (req, res) => {
 export const applyForJobById = async (req, res) => {
   try {
     const { jobId } = req.params;
-    const { userId, coverLetter, resumeId } = req.body;
+    const { user, coverLetter, resume } = req.body;
 
     const application = new jobApplication({
       job: jobId,
-      user: userId,
+      user,
       coverLetter,
-      resume: resumeId,
+      resume,
     });
 
-    await application.save();
-    res.status(201).json({ message: "Application submitted successfully." });
+    const savedApplication = await application.save();
+
+    res.status(201).json({
+      message: "Application submitted successfully",
+      application: savedApplication,
+    });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while processing the application." });
+    res.status(500).json({ error: "Error submitting job application" });
   }
 };

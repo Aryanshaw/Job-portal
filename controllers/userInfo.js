@@ -28,3 +28,20 @@ export const getResumeById = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+export const updateResume = async (req, res) => {
+  try {
+    const resumeId = req.params.id;
+    if (!resumeId) throw new Error("Invalid resume id");
+    const newUpdatedResume = await UserResume.findByIdAndUpdate(
+      resumeId,
+      { $set: req.body },
+      { new: true }
+    );
+    await newUpdatedResume.save();
+    return res.status(200).json({ message: "Resume updated successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+};
