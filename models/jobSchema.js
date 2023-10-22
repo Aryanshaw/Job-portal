@@ -19,11 +19,11 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     requirements: {
-      type: [String], // You can store requirements as an array of strings.
+      type: [String], 
     },
     type: {
       type: String,
-      enum: ["Full-Time", "Part-Time", "Contract", "Internship"], // You can define job types.
+      enum: ["Full-Time", "Part-Time", "Contract", "Internship"],
       required: true,
     },
     salary: {
