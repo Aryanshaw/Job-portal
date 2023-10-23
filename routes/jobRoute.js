@@ -2,8 +2,11 @@ import express from "express";
 import {
   applyForJobById,
   createJob,
+  getAllJobApplications,
   getAllJobs,
+  getJobApplicationByJobId,
   getJobById,
+  getJobByInput,
   updateJob,
 } from "../controllers/Jobs.js";
 
@@ -13,6 +16,9 @@ router.get("/getAllJobs", getAllJobs);
 router.post("/createJob", createJob);
 router.get("/getJobById/:id", getJobById);
 router.put("/updateJob/:id", updateJob);
-router.post("/applyForJobById/:id",applyForJobById)
+router.post("/applyForJobById/:id", applyForJobById);
+router.get("/getAllJobApplications", getAllJobApplications);
+router.get("/getJobApplicationByJobId/:id", getJobApplicationByJobId);
+router.post("/getJobByInput", getJobByInput);
 
 export default router;

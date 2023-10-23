@@ -55,14 +55,15 @@ export const updateJob = async (req, res) => {
 
 export const applyForJobById = async (req, res) => {
   try {
-    const { jobId } = req.params;
+    const { id } = req.params;
     const { user, coverLetter, resume } = req.body;
 
     const application = new jobApplication({
-      job: jobId,
+      job: id,
       user,
       coverLetter,
       resume,
+      applied: true,
     });
 
     const savedApplication = await application.save();
@@ -74,5 +75,41 @@ export const applyForJobById = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error submitting job application" });
+  }
+};
+
+export const getAllJobApplications = async (req, res) => {
+  try {
+    const jobApplications = await jobApplication.find();
+    if (!jobApplication)
+      res.status(404).json({ message: "Job application not found" });
+    else res.status(200).json({ applications: jobApplications });
+  } catch (error) {
+    res.status(500).json({ message: "Job application error" });
+  }
+};
+
+export const getJobApplicationByJobId = async (req, res) => {
+  try {
+    const jobId = req.params.id;
+    const application = await jobApplication
+      .findOne({ job: jobId })
+      .populate("job");
+    if (!application)
+      res.status(404).json({ message: "Job Application Not Found" });
+    else res.status(200).json(application);
+  } catch (error) {
+    res.status(500).json({ message: "Job Application Error" });
+  }
+};
+
+export const getJobByInput = async (req, res) => {
+  try {
+    const { title } = req.body;
+    const job = await jobSchema.find({ title });
+    if (!job) return res.status(404).json("No Jobs Available");
+    res.status(200).json(job);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

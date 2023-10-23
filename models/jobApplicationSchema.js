@@ -5,6 +5,10 @@ const jobApplicationSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   coverLetter: String,
   resume: { type: mongoose.Schema.Types.ObjectId, ref: "UserResume" },
+  applied: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 const jobApplication = mongoose.model("jobApplication", jobApplicationSchema);

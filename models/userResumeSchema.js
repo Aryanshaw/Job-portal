@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const userResumeSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   skills: [String],
   experience: [
     {
