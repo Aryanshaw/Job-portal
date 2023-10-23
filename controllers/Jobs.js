@@ -58,6 +58,18 @@ export const applyForJobById = async (req, res) => {
     const { id } = req.params;
     const { user, coverLetter, resume } = req.body;
 
+    const existingApplication = await jobApplication
+      .findOne({ job: id, user })
+      .exec();
+
+    if (existingApplication) {
+      return res.status(400).json({
+        error: "You have already applied for this job",
+        application: existingApplication,
+        submitted: true,
+      });
+    }
+
     const application = new jobApplication({
       job: id,
       user,
