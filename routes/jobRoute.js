@@ -5,6 +5,7 @@ import {
   getAllJobApplications,
   getAllJobs,
   getJobApplicationByJobId,
+  getJobApplicationByUserId,
   getJobById,
   getJobByInput,
   updateJob,
@@ -19,6 +20,7 @@ router.put("/updateJob/:id", updateJob);
 router.post("/applyForJobById/:id", applyForJobById);
 router.get("/getAllJobApplications", getAllJobApplications);
 router.get("/getJobApplicationByJobId/:id", getJobApplicationByJobId);
+router.get("/getJobApplicationByUserId/:id", getJobApplicationByUserId);
 router.post("/getJobByInput", getJobByInput);
 
 export default router;

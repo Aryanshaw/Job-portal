@@ -56,7 +56,7 @@ export const updateJob = async (req, res) => {
 export const applyForJobById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user, coverLetter, resume } = req.body;
+    const { user, coverLetter, resume, applied } = req.body;
 
     const existingApplication = await jobApplication
       .findOne({ job: id, user })
@@ -107,6 +107,21 @@ export const getJobApplicationByJobId = async (req, res) => {
     const application = await jobApplication
       .findOne({ job: jobId })
       .populate("job");
+
+    if (!application)
+      res.status(404).json({ message: "Job Application Not Found" });
+    else res.status(200).json(application);
+  } catch (error) {
+    res.status(500).json({ message: "Job Application Error" });
+  }
+};
+export const getJobApplicationByUserId = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const application = await jobApplication
+      .find({ user: userId })
+      .populate("job");
+
     if (!application)
       res.status(404).json({ message: "Job Application Not Found" });
     else res.status(200).json(application);

@@ -2,8 +2,8 @@ import UserResume from "../models/userResumeSchema.js";
 
 export const createUserResume = async (req, res) => {
   try {
-    const { user,skills, experience, projects } = req.body;
-    const userResume = new UserResume({ skills, experience, projects ,user});
+    const { user, skills, experience, projects } = req.body;
+    const userResume = new UserResume({ skills, experience, projects, user });
     const savedResume = await userResume.save();
     res.status(201).json({
       message: "User resume created successfully",

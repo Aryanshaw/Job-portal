@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userResumeSchema = new mongoose.Schema({
+const UserResume = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   skills: [String],
   experience: [
@@ -22,6 +22,5 @@ const userResumeSchema = new mongoose.Schema({
   ],
 });
 
-const UserResume = mongoose.model("UserResume", userResumeSchema);
+export default mongoose.model("UserResume", UserResume);
 
-export default UserResume;
