@@ -17,7 +17,7 @@ To set up and run the project, follow the instructions below for each folder.
 2. **Clone the Repository**
 
    ```
-   git clone <repository_url>
+   git clone https://github.com/Aryanshaw/Job-portal
    cd project-folder
    ```
 
